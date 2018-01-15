@@ -3,6 +3,7 @@
 #define AA 0.1
 
 uniform samplerCube cubemap;
+uniform sampler2D backgroundTex;
 uniform float aperture;
 uniform float renderGrid;
 
@@ -67,7 +68,9 @@ void main() {
   vec2 latLon = domeXYToLatLon(vertTexCoord, aperture*PI);
   vec3 ray = latLonToXYZ(latLon);
   //vec3 color = ray * 0.5 + vec3(0.5);
-  vec3 color = vec3(textureCube(cubemap, ray));
+  vec4 cubeColor = textureCube(cubemap, ray);
+  vec4 backgroundColor = texture(backgroundTex, vertTexCoord);
+  vec3 color = mix(cubeColor, backgroundColor, backgroundColor.a).rgb;
 
   vec3 gridColor = getGrid(latLon.yx, vec3(1.0, 1.0, 0.0), 45.0, 0.6, 15.0, 0.2);
 //  float gridX = 1.0 - smoothstep(gridWeight*0.5-AA, gridWeight*0.5+AA, mod(latLon.x - gridWeight*0.5, gridSize.x));

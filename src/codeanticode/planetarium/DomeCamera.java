@@ -92,6 +92,10 @@ public class DomeCamera {
 	  renderer.imageToForeground(theImage, x0, y0, w, h);
   }
   
+  public void drawIntoBackground(PImage theImage) {
+	  renderer.drawIntoBackground(theImage);
+  }
+  
   /* TODO: figure out a way for this to work
   public void imageToBackground(PImage theImage, int x0, int y0, int w, int h) {
 	  renderer.imageToBackground(theImage, x0, y0, w, h);

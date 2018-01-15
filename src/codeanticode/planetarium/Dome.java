@@ -315,6 +315,12 @@ public class Dome extends PGraphics3D {
 		backgroundCanvas.image(theImage, x0, y0, w, h);
 		backgroundCanvas.endDraw();
 	}
+	
+	protected void drawIntoBackground(PImage theImage) {
+		if (cubeMapQuadShader != null) {
+			cubeMapQuadShader.set("backgroundTex", theImage);
+		}
+	}
 
 	private void initDomeQuad() {
 		if (domeQuad == null) {
